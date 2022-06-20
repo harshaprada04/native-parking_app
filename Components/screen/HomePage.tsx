@@ -21,7 +21,6 @@ function HomePage({ navigation }: any) {
       await array.push(object);
     }
     await contexts.setParkingLotDia(array);
-    console.log(contexts.parkingLotDia);
     navigation.navigate("ParkingLot");
   };
 

@@ -243,7 +243,6 @@ function CheckOut({navigation,route}:any) {
         const id:number = await route.params.id;
         setCurrentVehicle(contexts.parkingLotDia[id]);
         let checkIn:any = await contexts.parkingLotDia[id]["checkIn"];
-        console.log(checkIn)
         let checkOut:any = await contexts.parkingLotDia[id]["checkOut"];
         const timeDifference = Math.ceil((checkOut.getTime()-checkIn.getTime())/(1000*60*60));
         if(timeDifference&lt;=2){
