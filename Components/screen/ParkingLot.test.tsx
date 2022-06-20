@@ -1,6 +1,6 @@
 import "@testing-library/react-native";
 import { fireEvent, render } from "@testing-library/react-native";
-import { Context } from "../../Context/Context";
+import { Context } from "../../Context/ContextProvider";
 import ParkingLot from "./ParkingLot";
 
 describe("Parking Lot is empty",()=>{

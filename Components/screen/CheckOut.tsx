@@ -1,9 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Text, View , StyleSheet} from 'react-native';
 import { Button } from 'react-native-paper';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { postData } from '../../action/postApi';
-import { Context } from '../../Context/Context';
+import { Context } from '../../Context/ContextProvider';
 
 function CheckOut({navigation,route}:any) {
     const [currentVehicle, setCurrentVehicle] = useState<any>({})
@@ -48,7 +47,6 @@ function CheckOut({navigation,route}:any) {
             <Text style={styles.text} testID='deregister-time-spent'>Check-In : {Object.keys(currentVehicle).length>0?currentVehicle.checkIn.toString():"loading"} </Text>
             <Text style={styles.text} testID='deregister-time-spent'>Check-Out : {Object.keys(currentVehicle).length>0?currentVehicle.checkOut.toString():"loading"}</Text>
             <Text style={styles.text} testID='deregister-charge'>Amount : ${amount} </Text>
-            {/* <View style={{alignItems:"center"}}> */}
             <Button 
             testID ='deregister-payment-button'
             style={styles.btn}
@@ -56,7 +54,6 @@ function CheckOut({navigation,route}:any) {
             onPress={()=>{
                paymentGateWay(currentVehicle.id)
             }}>Pay ${amount}</Button>
-            {/* </View> */}
         </View>
     </View>
     );

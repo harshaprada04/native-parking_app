@@ -1,6 +1,6 @@
 import "@testing-library/react-native";
 import { fireEvent, render } from "@testing-library/react-native";
-import HomePage from "./screen/HomePage";
+import HomePage from "../screen/HomePage";
 
 jest.setTimeout(10000)
 test("render",async ()=>{

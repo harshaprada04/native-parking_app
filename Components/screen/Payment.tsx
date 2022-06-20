@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Context } from '../Context/Context';
+import { Context } from '../../Context/ContextProvider';
 
 function Payment({navigation,route}:any) {
     const contexts = useContext(Context);

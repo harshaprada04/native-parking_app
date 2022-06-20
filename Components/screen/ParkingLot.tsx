@@ -1,20 +1,27 @@
 import React, { useContext, useState } from "react";
-import { FlatList, StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import {
+  FlatList,
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+} from "react-native";
 import { Button, TextInput } from "react-native-paper";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Context } from "../../Context/Context";
+import { Context } from "../../Context/ContextProvider";
 
 function ParkingLot({ navigation }: any) {
-  const [vehicleDetailsModal, setVehicleDetailsModal] = useState<Boolean>(false);
+  const [vehicleDetailsModal, setVehicleDetailsModal] =useState<Boolean>(false);
   const [isParkingLotIsFull, setIsParkingLotIsFull] = useState<Boolean>(false);
   const [vehicleNo, setVehicleNo] = useState<string>("");
   const contexts: any = useContext(Context);
- 
+
   const BookHandler = async () => {
     // const randomId = await contexts.parkingLotDia.findIndex((data: any) => {
     //   return data.isBooked === false;
     // });
-    const randomId = await Math.floor(Math.random()*contexts.parkingLotDia?.length)
+    const randomId = await Math.floor(
+      Math.random() * contexts.parkingLotDia?.length
+    );
     contexts.setParkingLotDia(
       contexts.parkingLotDia.map((data: any, index: number) => {
         if (index === randomId) {
@@ -74,7 +81,7 @@ function ParkingLot({ navigation }: any) {
       >
         <View style={styles.vdBtn}>
           <Button
-          testID = "VD-update"
+            testID="VD-update"
             mode="contained"
             uppercase={false}
             onPress={() => {
@@ -84,16 +91,16 @@ function ParkingLot({ navigation }: any) {
             Vehicle Details
           </Button>
         </View>
-        <View 
-        style={styles.parkingSpaceContainer}
-        >
+        <View style={styles.parkingSpaceContainer}>
           <FlatList
-           numColumns={3}
+            numColumns={3}
             data={contexts.parkingLotDia}
             renderItem={(itemData) => {
               return (
-                <View style={styles.parkingSpaceBtn}
-                testID={`parking-drawing-space-${itemData.index}`}>
+                <View
+                  style={styles.parkingSpaceBtn}
+                  testID={`parking-drawing-space-${itemData.index}`}
+                >
                   <Button
                     testID={`parking-drawing-space-number-${itemData.index}`}
                     style={styles.btn}
@@ -104,10 +111,10 @@ function ParkingLot({ navigation }: any) {
                   </Button>
                   {itemData.item.isBooked && (
                     <Button
-                    uppercase={false}
-                    testID={`parking-drawing-registered-${itemData.index}`}
-                    style={styles.chechOutBtn}
-                    color="#FF8886"
+                      uppercase={false}
+                      testID={`parking-drawing-registered-${itemData.index}`}
+                      style={styles.chechOutBtn}
+                      color="#FF8886"
                       mode="contained"
                       onPress={() => {
                         checkOutHandler(itemData.item.id);
@@ -125,37 +132,39 @@ function ParkingLot({ navigation }: any) {
       {vehicleDetailsModal && (
         <View style={styles.vdContainer}>
           <TextInput
-          style={styles.input}
-          testID="parking-drawing-registration-input"
+            style={styles.input}
+            testID="parking-drawing-registration-input"
             mode="outlined"
             onChangeText={setVehicleNo}
             value={vehicleNo}
             label="Vehicle Number"
           />
-          <View style={{flexDirection:"row", marginRight:10}}>
-          <Button
-          testID="parking-drawing-add-carbutton"
-           uppercase={false}
-            style={styles.vdSubmitBtn}
-            mode="contained"
-            disabled={!vehicleNo}
-            onPress={() => {
-              BookHandler();
-              setVehicleDetailsModal(false);
-            }}
-          >
-            Submit
-          </Button>
-          <Button
-          testID="back_btn"
-             uppercase={false}
-            style={styles.vdCancelBtn}
-            mode="contained"
-            color="red"
-            onPress={() => {
-              setVehicleDetailsModal(false);
-            }}
-          >Back</Button>
+          <View style={{ flexDirection: "row", marginRight: 10 }}>
+            <Button
+              testID="parking-drawing-add-carbutton"
+              uppercase={false}
+              style={styles.vdSubmitBtn}
+              mode="contained"
+              disabled={!vehicleNo}
+              onPress={() => {
+                BookHandler();
+                setVehicleDetailsModal(false);
+              }}
+            >
+              Submit
+            </Button>
+            <Button
+              testID="back_btn"
+              uppercase={false}
+              style={styles.vdCancelBtn}
+              mode="contained"
+              color="red"
+              onPress={() => {
+                setVehicleDetailsModal(false);
+              }}
+            >
+              Back
+            </Button>
           </View>
         </View>
       )}
@@ -164,7 +173,7 @@ function ParkingLot({ navigation }: any) {
           <View style={styles.toast}>
             <Text>Parking Lot is Full..</Text>
             <Button
-            testID="parking_lot_full"
+              testID="parking_lot_full"
               mode="text"
               color="red"
               onPress={() => {
@@ -182,7 +191,7 @@ function ParkingLot({ navigation }: any) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   vdBtn: {
     flex: 1,
@@ -195,7 +204,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   parkingSpaceBtn: {
-   marginLeft:20,
+    marginLeft: 20,
     marginTop: 20,
   },
   btn: {
@@ -205,10 +214,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   chechOutBtn: {
-    height:35,
-    width:20,
-    marginTop:-35,
-   
+    height: 35,
+    width: 20,
+    marginTop: -35,
   },
   vdContainer: {
     flex: 1,
@@ -217,11 +225,11 @@ const styles = StyleSheet.create({
   },
   vdSubmitBtn: {
     top: 30,
-    marginRight:-5
+    marginRight: -5,
   },
   vdCancelBtn: {
     top: 30,
-    marginLeft:30
+    marginLeft: 30,
   },
   parkingFullContainer: {
     flex: 1,
@@ -239,9 +247,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderRadius: 5,
   },
-  input:{
-    height:50,
-    width:"50%"
+  input: {
+    height: 50,
+    width: "50%",
   },
 });
 
